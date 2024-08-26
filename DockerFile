@@ -1,8 +1,12 @@
 FROM oven/bun:latest AS base
 
-ENV ZONE_ID=${ZONE_ID}
-ENV API_TOKEN=${API_TOKEN}
-ENV CF_GROUP_DOMAIN=${CF_GROUP_DOMAIN}
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+ENV ZONE_ID=ZONE_ID
+ENV API_TOKEN=API_TOKEN
+ENV CF_GROUP_DOMAIN=sub1.example.com,example.com,sub2.example.com
 
 RUN bun install
 
