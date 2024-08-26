@@ -1,0 +1,10 @@
+FROM oven/bun:latest AS base
+
+ENV ZONE_ID=${ZONE_ID}
+ENV API_TOKEN=${API_TOKEN}
+ENV CF_GROUP_DOMAIN=${CF_GROUP_DOMAIN}
+
+RUN bun install
+
+# run the app
+ENTRYPOINT [ "bun", "run", "index.ts" ]
