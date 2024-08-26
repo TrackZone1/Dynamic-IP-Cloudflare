@@ -3,6 +3,7 @@ dotenv.config();
 
 const arrayGroupDomain = process.env.CF_GROUP_DOMAIN?.trim().split(',');
 
+const UpdateCloudflare = () => {
 arrayGroupDomain?.forEach(async (domainName) => {
     const existingRecord = await fetch(`https://api.cloudflare.com/client/v4/zones/${process.env.ZONE_ID}/dns_records?type=A&name=${domainName}`, {
         headers: {
@@ -51,3 +52,10 @@ arrayGroupDomain?.forEach(async (domainName) => {
         console.log(data.success ? 'Updated' : 'Failed');
     }
     });
+};
+
+UpdateCloudflare();
+
+setInterval(() => {
+    UpdateCloudflare();
+}, 300 * 1000);
