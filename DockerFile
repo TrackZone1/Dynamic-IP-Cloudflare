@@ -2,6 +2,12 @@ FROM oven/bun:latest AS base
 
 WORKDIR /usr/src/app
 
+RUN apt-get update && apt-get install -y git
+
+# Cloner le repository GitHub
+RUN git clone https://github.com/TrackZone1/Dynamic-IP-Cloudflare.git .
+
+
 COPY package*.json ./
 
 ENV ZONE_ID=ZONE_ID
